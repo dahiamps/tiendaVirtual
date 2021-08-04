@@ -1,0 +1,20 @@
+{
+  "name": "tiendaVirtual",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dahiamps/tiendaVirtual.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dahiamps/tiendaVirtual/issues"
+  },
+  "homepage": "https://github.com/dahiamps/tiendaVirtual#readme"
+}
