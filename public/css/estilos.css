@@ -24,3 +24,7 @@ body {
 .btnr {
     width: 40%;
 }
+
+.login{
+    align-items: flex-end;
+}
