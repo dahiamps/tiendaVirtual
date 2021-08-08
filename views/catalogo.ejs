@@ -48,10 +48,10 @@
             <% results.forEach((products)=> { %>
 
                 <div class="card mx-5 my-4"  style="width: 21rem;">
-                    <img src="https://placeimg.com/300/300/tech" class="card-img-top" alt="...">
+                    <img src="<%= products.img %>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h4>
-                            Nombre: <%= products.name %>
+                            <strong><%= products.name %></strong>
                         </h4>
                         <p class="card-text">
                             <%= products.description %>
