@@ -181,6 +181,53 @@ app.post('/data', async (req, res) => {
 
 });
 
+//Contacto
+app.get(`/contacto`, (req, res) => {
+    if (req.session.loggedin) {
+        res.render(`contacto`, {
+            login: true,
+            name: req.session.name
+        })
+    } else {
+        res.render(`contacto`, {
+            login: false,
+            name: ''
+        })
+    }
+    
+})
+
+//Catalogo
+app.get('/catalogo', (req, res) => {
+    if (req.session.loggedin) {
+        connection.query('SELECT * FROM products', (error, results) => {
+            if (error) {
+                throw error
+            } else {
+                res.render('catalogo', {
+                    results: results,
+                    login: true,
+                    name: req.session.name
+                })
+            }
+        })
+
+    } else {
+        connection.query('SELECT * FROM products', (error, results) => {
+            if (error) {
+                throw error
+            } else {
+                res.render('catalogo', {
+                    results: results,
+                    login: false,
+                    name: ''
+                })
+            }
+        })
+    }
+
+    
+})
 
 
 //12 - Método para controlar que está login en todas las páginas
@@ -210,3 +257,8 @@ app.get('/logout', function (req, res) {
         res.redirect('/') // siempre se ejecutará después de que se destruya la sesión
     })
 });
+
+
+const crud = require('./controlles/crud')
+
+app.post('/saveContact', crud.saveContact)

@@ -17,6 +17,21 @@ exports.save = (req, res) => {
 }
 
 
+exports.saveContact = (req, res) => {
+    const name = req.body.name;
+    const telefono = req.body.telefono;
+    const correo = req.body.correo;
+    const asunto = req.body.asunto;
+    conexion.query('INSERT INTO contacto SET ?', { name: name, telefono: telefono, correo: correo, asunto: asunto }, (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.redirect('/contacto')
+        }
+    })
+}
+
+
 exports.update = (req, res) => {
     const id = req.body.id;
     const name = req.body.name;

@@ -13,13 +13,14 @@ router.get('/products', (req, res) => {
     })
 
 })
-router.get('/catalogo', (req, res) => {
 
-    connection.query('SELECT * FROM products', (error, results) => {
+router.get('/infoContactos', (req, res) => {
+
+    connection.query('SELECT * FROM contacto', (error, results) => {
         if (error) {
             throw error
         } else {
-            res.render('catalogo', { results: results })
+            res.render('infoContactos', { results: results })
         }
     })
 
@@ -53,8 +54,23 @@ router.get('/delete/:id', (req, res) => {
     })
 })
 
+router.get('/deleteContacto/:id', (req, res) => {
+    const id = req.params.id;
+    connection.query('DELETE FROM contacto WHERE id = ?', [id], (error, results) => {
+        if (error) {
+            throw error
+        } else {
+            res.redirect('/infoContactos')
+        }
+    })
+})
+
+
+
+
 
 const crud = require('./controlles/crud')
 router.post('/save', crud.save)
 router.post('/update', crud.update)
+router.post('/saveContact', crud.saveContact)
 module.exports = router;
