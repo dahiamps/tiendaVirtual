@@ -54,8 +54,9 @@ app.get(`/register`, (req, res) => {
 })
 app.get(`/products`, (req, res) => {
     res.render(`products`)
-    
+
 })
+
 
 
 
@@ -163,7 +164,7 @@ app.post('/auth', async (req, res) => {
 });
 
 
-app.post('/data', async (req, res) => {
+app.get('/data', async (req, res) => {
 
     connection.query('SELECT * FROM users ', async (error, results, fields) => {
         if (results.length == 0) {
@@ -173,8 +174,7 @@ app.post('/data', async (req, res) => {
             //res.send('Incorrect Username and/or Password!');				
         } else {
             //creamos una var de session y le asignamos true si INICIO SESSION       
-            console.log("Data encontrada");
-
+            res.send(results)
         }
         res.end();
     });
@@ -194,8 +194,44 @@ app.get(`/contacto`, (req, res) => {
             name: ''
         })
     }
-    
+
 })
+//info producto
+
+
+app.get(`/producto/:id`, (req, res) => {
+    const id = req.params.id;
+    if (req.session.loggedin) {
+        connection.query('SELECT * FROM products WHERE id=?', [id], (error, results) => {
+            if (error) {
+                throw error
+            } else {
+                res.render(`infoProduct`, {
+                    producto: results[0],
+                    login: true,
+                    name: req.session.name
+                })
+            }
+        })
+    } else {
+        connection.query('SELECT * FROM products WHERE id=?', [id], (error, results) => {
+            if (error) {
+                throw error
+            } else {
+                res.render(`infoProduct`, {
+                    producto: results[0],
+                    login: false,
+                    name: ''
+                })
+            }
+        })
+    }
+
+
+
+
+})
+
 
 //Catalogo
 app.get('/catalogo', (req, res) => {
@@ -226,7 +262,7 @@ app.get('/catalogo', (req, res) => {
         })
     }
 
-    
+
 })
 
 
